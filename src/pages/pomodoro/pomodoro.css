@@ -1,0 +1,40 @@
+/* .timer-description{
+    line-height: 5rem;
+} */
+.margin-lg{
+  margin:5rem 0;
+}
+.mg-lft{
+  margin-left:6rem;
+}
+.mg-top{
+    margin-top:1rem;
+}
+.secondary-btn{
+    border-color: var(--primaryColor);
+    background: transparent;
+}
+.restart-container{
+    width:18rem;
+    height: 18rem;
+    background-color: var(--main-bg);
+    border-radius: 50%;
+    z-index:2;
+    position: relative;
+    margin: 2rem 0;
+}
+.align-md{
+    top:7rem;
+    left:3rem;
+    color: var(--primaryColor);
+}
+.align-lft{
+    top:7rem;
+    left:9rem;
+}
+.timer-label{
+    border:2px solid var(--primaryColor);
+    padding:0.5rem 0.4rem;
+    border-radius: 1rem;
+    width: fit-content;
+}
