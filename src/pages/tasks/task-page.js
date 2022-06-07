@@ -1,10 +1,18 @@
-import { TaskModal } from "../../components/modal/task-modal";
+import { TaskModel } from "../../components/modal/task-model";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useFilter } from "../../hooks/filter-context";
+import { SortFunc, SortTime, SearchTask } from "../../helpers/filter-func";
+import { TaskFilter } from "../../components/filter/filter";
 export default function TaskPage() {
   const [showModal, setShowModal] = useState(false);
   const [todoList, setTodoList] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [updateTodo, setUpdateTodo] = useState({});
+  const {
+    filter: { sortByPriority, sortByTime },
+    filterDispatch
+  } = useFilter();
   const saveToTaskList = (task) => {
     if (!task.name) {
       alert("task title required");
@@ -13,7 +21,6 @@ export default function TaskPage() {
       localStorage.setItem("todoList", JSON.stringify([...todoList, task]));
       setShowModal(false);
     }
-    console.log(task.name);
   };
   const getTaskListLocal = () => {
     return JSON.parse(localStorage.getItem("todoList"));
@@ -29,10 +36,24 @@ export default function TaskPage() {
     const currentTodo = todoList.find((todo) => todo.id === id);
     setUpdateTodo(currentTodo);
   };
-  const updateTaskList = ({ id, name, description, timer }) => {
+  const updateTaskList = ({
+    id,
+    name,
+    description,
+    timer,
+    breakTimer,
+    priorityTag
+  }) => {
     const updatedTodos = todoList.map((todo) =>
       todo.id === id
-        ? { ...todo, name: name, description: description, timer: timer }
+        ? {
+            ...todo,
+            name: name,
+            description: description,
+            timer: timer,
+            breakTimer: breakTimer,
+            priorityTag: priorityTag
+          }
         : todo
     );
     localStorage.setItem("todoList", JSON.stringify(updatedTodos));
@@ -46,6 +67,18 @@ export default function TaskPage() {
       setTodoList(saveTaskListLocal);
     }
   }, []);
+  const Priorities = { Low: 1, Medium: 2, High: 3 };
+  const [filters, setFilters] = useState({
+    searchByTitle: "",
+    filterOpen: false
+  });
+  const handleSearchTask = (e) => {
+    filterDispatch({ type: "FILTER_CLEAR", payload: {} });
+    setFilters({ ...filters, searchByTitle: e.target.value });
+  };
+  const filterByPriority = SortFunc(todoList, sortByPriority, Priorities);
+  const sortedData = SearchTask(filterByPriority, filters.searchByTitle);
+  const filterdData = SortTime(sortedData, sortByTime);
   return (
     <div className="task-container flex-col flex-space-between margin-btm">
       <div className="margin-auto ">
@@ -70,8 +103,32 @@ export default function TaskPage() {
           </div>
         </div>
         {todoList.length > 0 ? "" : <h4>No Tasks,lets..create tasks</h4>}
+        <div className="flex-row flex-center flex-wrap flex-space-between margin-l">
+          <div>
+            <input
+              type="search"
+              className="border-searchbox search-task bd-sm"
+              placeholder="search task"
+              value={filters.searchByTitle}
+              onChange={handleSearchTask}
+            />
+            <i className="fa fa-search search-filter border-searchbox"></i>
+          </div>
+          <div className="position-relative">
+            <button
+              className="primary-btn cursor-pointer"
+              onClick={() =>
+                setFilters({ ...filters, filterOpen: !filters.filterOpen })
+              }
+            >
+              <i className="fa fa-tasks cursor-pointer"></i>
+              filter
+            </button>
+          </div>
+        </div>
+        {filters.filterOpen ? <TaskFilter /> : ""}
         {showModal ? (
-          <TaskModal
+          <TaskModel
             isEdit={isEdit}
             setIsEdit={setIsEdit}
             updateTodo={updateTodo}
@@ -83,23 +140,51 @@ export default function TaskPage() {
           ""
         )}
         {todoList &&
-          todoList.map(({ id, name }) => (
-            <div className="flex-row gap flex-space-between task-list" key={id}>
-              <span>{name}</span>
-              <div>
-                <i
-                  className="fa fa-pencil-square-o cursor-pointer"
-                  aria-hidden="true"
-                  onClick={() => editTask(id)}
-                ></i>
-                <i
-                  className="fa fa-trash-o cursor-pointer"
-                  aria-hidden="true"
-                  onClick={() => deleteTask(id)}
-                ></i>
+          filterdData.map(
+            ({
+              id,
+              name,
+              timer,
+              description,
+              breakTimer,
+              date,
+              time,
+              priorityTag
+            }) => (
+              <div
+                className="flex-row gap flex-space-between task-list"
+                key={id}
+              >
+                <Link
+                  to="/pomodoro"
+                  state={{
+                    id,
+                    name,
+                    timer,
+                    description,
+                    date,
+                    time,
+                    breakTimer,
+                    priorityTag
+                  }}
+                >
+                  <span className="name padding-sm">{name}</span>
+                </Link>
+                <div>
+                  <i
+                    className="fa fa-pencil-square-o cursor-pointer"
+                    aria-hidden="true"
+                    onClick={() => editTask(id)}
+                  ></i>
+                  <i
+                    className="fa fa-trash-o cursor-pointer"
+                    aria-hidden="true"
+                    onClick={() => deleteTask(id)}
+                  ></i>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
       </div>
     </div>
   );
