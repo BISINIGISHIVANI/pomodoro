@@ -68,7 +68,7 @@ a {
   color: var(--mainWhite);
 }
 .dark-mode input,
-.dark-mode textarea {
+.dark-mode textarea ,.dark-mode .name{
   color: var(--mainWhite);
 }
 .flex-col {
@@ -159,7 +159,6 @@ a {
   border: 1px solid var(--primaryColor);
   z-index: 3;
 }
-
 @media screen and (max-width: 540px) {
   .row-reverse {
     display: flex;
