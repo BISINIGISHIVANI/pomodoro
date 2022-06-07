@@ -67,6 +67,10 @@ a {
   background-color: var(--mainBlack);
   color: var(--mainWhite);
 }
+.dark-mode input,
+.dark-mode textarea {
+  color: var(--mainWhite);
+}
 .flex-col {
   display: flex;
   flex-direction: column;
@@ -143,7 +147,7 @@ a {
   width: inherit;
 }
 .mg-sm {
-  margin: 1rem 0;
+  margin: 1rem 0.5rem;
 }
 .fa {
   margin-right: 0.6rem;

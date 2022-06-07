@@ -1,0 +1,52 @@
+.modal-input > input {
+  padding: 0.4rem;
+  border: none;
+  outline: none;
+}
+.modal-input input:focus {
+  outline: none;
+}
+.modal-container {
+  border: 2px solid var(--primaryColor);
+  color: var(--primaryColor);
+  margin: 1rem auto;
+  border-radius: 1rem;
+  z-index: 10;
+  transform: translate(20%);
+}
+.background-none {
+  background: none;
+  border: none;
+  outline: none;
+}
+.text-area {
+  padding: 0.4rem;
+  height: 3rem;
+  resize: none;
+}
+.task-list:hover {
+  border: 1px solid #000;
+  padding: 0.9rem 0.4rem;
+  border-radius: 0.4rem;
+}
+.task-list {
+  height: 4rem;
+  width: 25rem;
+}
+.margin-auto {
+  margin: 2rem auto;
+}
+.margin-sm {
+  margin: 1rem 0;
+}
+.margin-btm {
+  margin-bottom: 18rem;
+}
+@media screen and (max-width: 500px) {
+  .task-list {
+    width: 90vw;
+  }
+  .modal-container {
+    width: 90vw;
+  }
+}

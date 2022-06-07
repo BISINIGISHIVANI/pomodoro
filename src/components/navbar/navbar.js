@@ -1,5 +1,6 @@
 import "./navbar.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 export const Navbar = () => {
   const themeFromLocal = JSON.parse(localStorage.getItem("darkMode"));
 
@@ -17,10 +18,19 @@ export const Navbar = () => {
         <div>
           <ul className="flex-row gap-md flex-wrap list-none">
             <li>
-              <i class="fa fa-tasks"></i>Task
+              <Link to="/">
+                <i className="fa fa-home"></i>Home
+              </Link>
             </li>
             <li>
-              <i className="fa fa-clock-o"></i>Pomodoro
+              <Link to="/tasks">
+                <i class="fa fa-tasks"></i>Task
+              </Link>
+            </li>
+            <li>
+              <Link to="/pomodoro">
+                <i className="fa fa-clock-o"></i>Pomodoro
+              </Link>
             </li>
           </ul>
         </div>

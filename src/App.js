@@ -1,10 +1,10 @@
-import './App.css';
-import { Home } from './pages/home/home';
+import "./App.css";
+import { PublicRoute } from "./routes/public-route";
 
 function App() {
   return (
     <div className="App">
-     <Home/>
+      <PublicRoute />
     </div>
   );
 }
