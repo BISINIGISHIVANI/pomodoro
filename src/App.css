@@ -154,6 +154,7 @@ a {
 }
 .footer {
   background-color: var(--primaryColor);
+   margin-bottom: 0;
 }
 .footer-btm {
   border: 1px solid var(--primaryColor);

@@ -6,9 +6,10 @@
 - add task
 - edit/delete task
 - pomodoro timer
+- break timer
 - Filter  By
   - tag
-  - high to low
+  - time
   - ---
 
 ## Folder Structure
@@ -61,4 +62,5 @@ And then open http://localhost:3000 to view it in the browser.
 
 ## Desktop and mobile support
 ---
+
 

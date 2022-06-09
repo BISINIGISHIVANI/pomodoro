@@ -1,9 +1,14 @@
-import { TaskModel } from "../../components/modal/task-model";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useFilter } from "../../hooks/filter-context";
-import { SortFunc, SortTime, SearchTask } from "../../helpers/filter-func";
-import { TaskFilter } from "../../components/filter/filter";
+import {
+  TaskFilter,
+  SortFunc,
+  SortTime,
+  SearchTask,
+  useFilter,
+  TaskModel
+} from "./components";
+
 export default function TaskPage() {
   const [showModal, setShowModal] = useState(false);
   const [todoList, setTodoList] = useState([]);
@@ -102,7 +107,7 @@ export default function TaskPage() {
             </button>
           </div>
         </div>
-        {todoList.length > 0 ? "" : <h4>No Tasks,lets..create tasks</h4>}
+        {todoList.length > 0 ?
         <div className="flex-row flex-center flex-wrap flex-space-between margin-l">
           <div>
             <input
@@ -125,7 +130,8 @@ export default function TaskPage() {
               filter
             </button>
           </div>
-        </div>
+        </div> :
+        <h4>No Tasks,lets..create tasks</h4>}    
         {filters.filterOpen ? <TaskFilter /> : ""}
         {showModal ? (
           <TaskModel

@@ -91,6 +91,7 @@ export const Pomodoro = ({ timer, breakTimer }) => {
         </div>
       )}
       {isBreakTime && (
+        <div>
         <CountdownCircleTimer
           isPlaying={isPlaying}
           size={320}
@@ -102,6 +103,36 @@ export const Pomodoro = ({ timer, breakTimer }) => {
         >
           {({ remainingTime }) => renderBreakTime({ remainingTime })}
         </CountdownCircleTimer>
+        {/*  timer controllers */}
+          <div className="mg-lft mg-top flex-row gap place-center">
+            {!isPlaying ? (
+              <i
+                className="fa fa-2x fa-pause-circle cursor-pointer"
+                onClick={() => setIsPlaying(false)}
+              ></i>
+            ) : (
+              <i
+                className="fa fa-2x fa-pause-circle-o cursor-pointer icon-color"
+                onClick={() => setIsPlaying(false)}
+              ></i>
+            )}
+            {isPlaying ? (
+              <i
+                className="fa fa-2x fa-play-circle cursor-pointer"
+                onClick={() => setIsPlaying(true)}
+              ></i>
+            ) : (
+              <i
+                className="fa fa-2x fa-play-circle-o cursor-pointer"
+                onClick={() => setIsPlaying(true)}
+              ></i>
+            )}
+            <i
+              className="fa fa-2x fa-repeat cursor-pointer"
+              onClick={() => setKey(key + 1)}
+            ></i>
+          </div>
+        </div>
       )}
       {/* after completion time show restart button */}
       {!isTaskTime && !isBreakTime && (
