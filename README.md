@@ -1,8 +1,8 @@
 # React-Pomodoro
 ## `pomodoro App`
-  #### Pomodoro is a app for   online fast and ease[pomodoro- App](https://snap-pomodoro.netlify.app/).
+  #### Pomodoro is a app for   online fast and ease  [pomodoro- App](https://snap-pomodoro.netlify.app/).
 
-- features of app
+#### features of app
 - add task
 - edit/delete task
 - pomodoro timer
