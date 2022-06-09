@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export const Navbar = () => {
   const themeFromLocal = JSON.parse(localStorage.getItem("darkMode"));
-
   const [darkMode, setDarkMode] = useState(themeFromLocal || false);
-
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
     darkMode
@@ -25,11 +23,6 @@ export const Navbar = () => {
             <li>
               <Link to="/tasks">
                 <i class="fa fa-tasks"></i>Task
-              </Link>
-            </li>
-            <li>
-              <Link to="/pomodoro">
-                <i className="fa fa-clock-o"></i>Pomodoro
               </Link>
             </li>
           </ul>
